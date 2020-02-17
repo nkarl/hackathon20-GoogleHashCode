@@ -18,10 +18,20 @@
     <ClCompile Include="main.c">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="functions.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Header.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="a_example.in" />
+    <None Include="c_medium.in" />
+    <None Include="b_small.in" />
+    <None Include="d_quite_big.in" />
+    <None Include="e_also_big.in" />
   </ItemGroup>
 </Project>
