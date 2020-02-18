@@ -26,9 +26,9 @@
 												: DETERMINE MAX_SLICES: This is done by adding data point by point
 																		down the list.
 																		Condition of termination: sum > max
-																		Tuning sum: open original input file
-																					read in data in ascending order
-																					add to <sum>
+															Tuning sum: Open original input file
+																		Read in data in ascending order
+																		Add to <sum>
 																		Condition of termination: sum > max
 						   C- OUTPUT			: OPEN OUTPUT FILE AND WRITE OUT RESULTS
 														
