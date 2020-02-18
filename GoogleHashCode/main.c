@@ -3,7 +3,7 @@
 	TEAM: COUGARS RAWR: 3, MEMBERS: KARL-ALBERT
 					ROGUE_RUSSIAN
 					WENZHI ZHUANG
-	PROBLEM STATEMENT: Order the maximum number of pizzas possible with the conditions below:
+	PROBLEM STATEMENT: Order the max_slicesimum number of pizzas possible with the conditions below:
 					   - Number of pizza slices must never exceed the number of participants
 					   - Each pizza has a different number of slices.
 	DATA FORM:		LINE1: <# OF PARTICIPANTS>	<TOTAL # OF PIZ_TYPES>
@@ -11,7 +11,7 @@
 	EXPECTED OUTPUT: 	LINE1: <# OF PIZ_TYPES>
 				LINE2: {SET OF SELECTED PIZZAS IN ASCENDING ORDER}
  ----------------------------------------------------------------------------------------------------------------------
-	DATASETS INFORMATION:	SET	MAX				TYPES
+	DATASETS INFORMATION:	SET	max_slices				TYPES
 							a. 	17				4
 							b. 	100				10
 							c. 	4,500			50
@@ -25,11 +25,11 @@
 																   simultaneously into an output file.
 												: DETERMINE MAX_SLICES: This is done by adding data point by point
 																		down the list.
-																		Condition of termination: sum > max
+																		Condition of termination: sum > max_slices
 															Tuning sum: Open original input file
 																		Read in data in ascending order
 																		Add to <sum>
-																		Condition of termination: sum > max
+																		Condition of termination: sum > max_slices
 						   C- OUTPUT			: OPEN OUTPUT FILE AND WRITE OUT RESULTS
 														
 			--------------------------------------------------------------------------------------------
@@ -90,9 +90,9 @@ int main(void)
 	*******************************************************************************************************************
 			SETS PARAMETERS
 	***************************************************************************/
-	int max = 0, num_types = 0, num_slices = 0;
+	int max_slices = 0, num_types = 0;
 
-	max = read_data(infile1);
+	max_slices = read_data(infile1);
 	num_types = read_data(infile1);
 
 	/**************************************************************************
@@ -132,8 +132,9 @@ int main(void)
 	
 	fclose(outfile1);
 	fclose(outfile2);
+
 	/**************************************************************************
-			DETERMINES MAX_SLICES
+			DETERMINES max_slices
 	***************************************************************************/
 	// OPENS RAWDATA.IN IN READ-MODE, READY FOR CALCULATION
 	FILE* newinfile1 = NULL, *newinfile2 = NULL;
@@ -141,8 +142,39 @@ int main(void)
 	newinfile2 = fopen("rawdata_new.in", "r");
 
 	int sum[2] = { 0,0 };
-	sum[1] = get_slices(newinfile1, newinfile2, max, num_types);
+	sum[1] = get_slices(newinfile1, newinfile2, max_slices, num_types);
+
+	// UPDATE: 2020-02-18-11:18 ////////////////////////////////////////////////
+	// WORK IN PROGRESS BELOW
+	// CREATES GLOBAL ARRAYS TO PREPARE TO RECEIVE DATA STREAM FROM INPUT FILE.
+	int* arr1 = NULL, arr2 = NULL;
+	arr1 = malloc(sizeof(int) * num_types);
+	arr2 = malloc(sizeof(int) * num_types);
+
+	// PUSH DATA INTO ARRAY1 IN ASCENDING ORDER (LIKE ORIGINAL RAW)
+	int i = 0, j = 0;
+	for (i = 0; i < num_types; i++)
+	{
+
+	}
+
+	// REARRANGE DATA IN DESCENDING ORDER AND PUSH INTO ARRAY2
+	for (j = 0; j >= 0; j--)
+	{
+
+	}
+
+	// Push all values of <selected numbers> into a new array <arr3> and sort it.
+
+	// Write <sum> and <types> in output file.
+	int* arr3 = NULL;
+	// <arr3> must be initialized with 0 in all allocated blocks.
+	// In order to do this, <sum> and <types> must be stored in main().
 	
+	// Write <arr3> in the output file.
+
+	////////////////////////////////////////////////////////////////////////////
+
 	fclose(newinfile1);
 	fclose(newinfile2);
 	fclose(outfile1);

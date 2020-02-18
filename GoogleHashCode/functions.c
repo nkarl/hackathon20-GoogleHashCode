@@ -55,8 +55,8 @@ void reorganize_dataset(FILE* infile, FILE* outfile1, FILE* outfile2, int num_ty
 	free(array2);
 }
 
-// ADDS INCREMENTALLY DOWN THE NEW RAWDATA LIST. TERMINATE CONDITION: sum > max
-int get_slices(FILE* infile1, FILE* infile2, int max, int num_types)
+// ADDS INCREMENTALLY DOWN THE NEW RAWDATA LIST. TERMINATE CONDITION: sum > max_slices
+int get_slices(FILE* infile1, FILE* infile2, int max_slices, int num_types)
 {
 	int* array = NULL;
 
@@ -64,16 +64,16 @@ int get_slices(FILE* infile1, FILE* infile2, int max, int num_types)
 
 	int i = 0, j = 0, types = 0, sum = 0, rawdata = 0;
 
-	printf("\nCONDITION\t\t: [max = %d]\t[size = %d]\n\nSELECTED DATA BELOW\t:\n\n", max, num_types);
+	printf("\nCONDITION\t\t: [max_slices = %d]\t[size = %d]\n\nSELECTED DATA BELOW\t:\n\n", max_slices, num_types);
 
-	while (sum < max)
+	while (sum < max_slices)
 	{
 		rawdata = read_data(infile2);
 		array[i] = rawdata;
 		sum = sum + rawdata;
 		i = i++;
 		types = i;
-		if (sum > max)
+		if (sum > max_slices)
 		{
 			i = i - 1;
 			sum = sum - array[i];
@@ -84,7 +84,7 @@ int get_slices(FILE* infile1, FILE* infile2, int max, int num_types)
 		printf("%d	", rawdata);
 	}
 
-	while (sum < max)
+	while (sum < max_slices)
 	{
 		rawdata = read_data(infile1);
 		array[j] = rawdata;
@@ -93,7 +93,7 @@ int get_slices(FILE* infile1, FILE* infile2, int max, int num_types)
 		j = j++;
 		types = types++;
 
-		if (sum > max)
+		if (sum > max_slices)
 		{
 			j = j - 1;
 			sum = sum - array[j];
@@ -104,7 +104,7 @@ int get_slices(FILE* infile1, FILE* infile2, int max, int num_types)
 		printf("%d	", rawdata);
 	}
 
-	printf("\n\nRESULT\t\t\t: [SLICES < max] = %d\t[TYPES < size] = %d\n", sum, types);
+	printf("\n\nRESULT\t\t\t: [SLICES < max_slices] = %d\t[TYPES < size] = %d\n", sum, types);
 
 	return sum;
 }
