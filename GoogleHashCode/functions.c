@@ -28,12 +28,12 @@ void reorganize_dataset(FILE* infile, FILE* outfile1, FILE* outfile2, int num_ty
 	array1 = malloc(sizeof(int) * num_types);
 	array2 = malloc(sizeof(int) * num_types);
 
-	// DECLARES num_types VARIABLES AND A VARIABLE TO STORE A SCANNED-IN DATAPOINT
+	// DECLARES VARIABLES: <num_types> AND <datapoint> TO STORE A SCANNED-IN ENTRIES ONE AT A TIME INTO A BLOCK IN ARRAYS
 	int i = 0, j = 0, rawdata = 0;
 
 	printf("\nRAW DATA, SIZE[%d]: ", num_types);
 
-	// FIRST: SCANS IN DATA POINT-BY-POINT AND ALLOCATES TO ASCENDING BLOCKS IN DECLARED <array1>.
+	// FIRST: SCANS IN DATA POINT-BY-POINT AND ALLOCATES TO ASCENDING BLOCKS IN <array1>.
 	for (i = 0; i < num_types; i++)
 	{
 		rawdata = read_data(infile);
@@ -55,7 +55,7 @@ void reorganize_dataset(FILE* infile, FILE* outfile1, FILE* outfile2, int num_ty
 	free(array2);
 }
 
-// ADDS INCREMENTALLY DOWN THE NEW RAWDATA LIST. TERMINATE CONDITION: sum > num_types
+// ADDS INCREMENTALLY DOWN THE NEW RAWDATA LIST. TERMINATE CONDITION: sum > max
 int get_slices(FILE* infile1, FILE* infile2, int max, int num_types)
 {
 	int* array = NULL;
@@ -70,7 +70,6 @@ int get_slices(FILE* infile1, FILE* infile2, int max, int num_types)
 	{
 		rawdata = read_data(infile2);
 		array[i] = rawdata;
-		printf("datapoint = %d ", rawdata);
 		sum = sum + rawdata;
 		i = i++;
 		types = i;
@@ -79,15 +78,17 @@ int get_slices(FILE* infile1, FILE* infile2, int max, int num_types)
 			i = i - 1;
 			sum = sum - array[i];
 			types = i;
+			//printf("rawdata = %d ", rawdata);
 			break;			
 		}
+		printf("datapoint = %d ", rawdata);
 	}
 
 	while (sum < max)
 	{
 		rawdata = read_data(infile1);
 		array[j] = rawdata;
-		printf("rawdata = %d ", rawdata);
+		//printf("rawdata = %d ", rawdata);
 		sum = sum + rawdata;
 		j = j++;
 		types = types++;
@@ -97,11 +98,13 @@ int get_slices(FILE* infile1, FILE* infile2, int max, int num_types)
 			j = j - 1;
 			sum = sum - array[j];
 			types = types - 1;
+			//printf("rawdata = %d ", rawdata);
 			break;
 		}
+		printf("datapoint = %d ", rawdata);
 	}
 
 	printf("\n\n\t\t\tSLICES = %d\ttypes = %d\n", sum, types);
 
-	return sum, types;
+	return sum;
 }

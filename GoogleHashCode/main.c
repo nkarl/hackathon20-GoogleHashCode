@@ -135,10 +135,12 @@ int main(void)
 	newinfile1 = fopen("rawdata.in", "r");
 	newinfile2 = fopen("rawdata_new.in", "r");
 
-	int sum[] = get_slices(newinfile1, newinfile2, max, num_types);
+	int sum[2] = { 0,0 };
+	sum[1] = get_slices(newinfile1, newinfile2, max, num_types);
 	
-
-	fclose(newinfile1, newinfile2, outfile1, outfile2);
-	//fclose(outfile2);
+	fclose(newinfile1);
+	fclose(newinfile2);
+	fclose(outfile1);
+	fclose(outfile2);
 	return 0;
 }
