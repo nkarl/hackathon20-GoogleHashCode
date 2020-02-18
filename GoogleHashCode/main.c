@@ -38,7 +38,9 @@
 												First, read all raw data into arr1
 												then, create pointers array ptr and points to arr1
 												Finally, use for loop to arrange values of arr1 into new arr2
-
+					UPDATE: 2020-02-17, MONDAY | 22:39
+												NEED TO PUT ORIGINAL ASCENDING DATA INTO A SEPARATE FILE
+												This is needed to fine tune <sum>.
 ***********************************************************************************************************************/
 
 #include "Header.h"
@@ -62,6 +64,10 @@ int main(void)
 			infile = fopen("b_small.in", "r");
 		else if (userchoice == 'c')
 			infile = fopen("c_medium.in", "r");
+		else if (userchoice == 'd')
+			infile = fopen("d_quite_big.in", "r");
+		else if (userchoice == 'e')
+			infile = fopen("e_also_big.in", "r");
 		else
 		{
 			userchoice = '\0';
@@ -83,27 +89,46 @@ int main(void)
 	/**************************************************************************
 			FETCHES RAW DATA AND REORGANIZES
 	***************************************************************************/
-
 	outfile = fopen("rawdata.in", "w");
-	
-	int counter = 0;
 	
 	if (userchoice == 'a')
 	{
-		counter = setAtypes;
-		reorganize_datasetA(infile, outfile, counter);
+		num_types = setAtypes;
+		reorganize_datasetA(infile, outfile, num_types);
 	}
 
 	else if (userchoice == 'b')
 	{
-		counter = setBtypes;
-		reorganize_datasetA(infile, outfile, counter);
+		num_types = setBtypes;
+		reorganize_datasetA(infile, outfile, num_types);
 	}
 	else if (userchoice == 'c')
 	{
-		counter = setCtypes;
-		reorganize_datasetA(infile, outfile, counter);
+		num_types = setCtypes;
+		reorganize_datasetA(infile, outfile, num_types);
 	}
+
+	else if (userchoice == 'd')
+	{
+		num_types = setDtypes;
+		reorganize_datasetA(infile, outfile, num_types);
+	}
+
+	else if (userchoice == 'e')
+	{
+		num_types = setEtypes;
+		reorganize_datasetA(infile, outfile, num_types);
+	}
+	
+	fclose(outfile);
+	/**************************************************************************
+			DETERMINES MAX_SLICES
+	***************************************************************************/
+	// OPENS RAWDATA.IN IN READ-MODE, READY FOR CALCULATION
+	FILE* newinfile = NULL;
+	newinfile = fopen("rawdata.in", "r");
+
+	int sum = get_slices(newinfile, max, num_types);
 	
 
 	fclose(infile);

@@ -1,5 +1,6 @@
 #include "Header.h"
 
+// ASKS USER TO CHOOSE ONE LETTER CORRESPONDING TO A DATA-SET.
 char choose_dataset(void)
 {
 	char userchoice = '\0';
@@ -9,6 +10,7 @@ char choose_dataset(void)
 	return userchoice;
 }
 
+// READS ONE DATA-POINT FROM INPUT FILE WHEN INVOKED. MEANT TO BE RECYCLED IN LOOPS.
 int read_data(FILE* infile)
 {
 	int datapoint = 0;
@@ -16,38 +18,69 @@ int read_data(FILE* infile)
 	return datapoint;
 }
 
-void reorganize_datasetA(FILE* infile, FILE* outfile, int counter)	// READS AND RE-ORGANIZES DATA IN DESCENDING ORDER.
+// READS AND RE-ORGANIZES DATA IN DESCENDING ORDER.
+void reorganize_datasetA(FILE* infile, FILE* outfile, int num_types)
 {	
-	// DELCARES A DYNAMIC ARRAY AND INITIALIZES ITS SIZE WITH POINTER TO THE VARIABLE <counter>
-	int* array_raw = NULL;
-	array_raw = malloc(sizeof(int) * counter);
-	int i, j, temp;
-	int rawdata = 0;
+	// DELCARES TWO DYNAMIC ARRAYS AND INITIALIZES THEIRS SIZE WITH <NULL>
+	int* array1 = NULL, * array2 = NULL;
+	
+	// INITIALIZES POINTER TO THE VARIABLE <num_types>
+	array1 = malloc(sizeof(int) * num_types);
+	array2 = malloc(sizeof(int) * num_types);
 
-	printf("\n\tRAW DATA: ");
+	// DECLARES num_types VARIABLES AND A VARIABLE TO STORE A SCANNED-IN DATAPOINT
+	int i = 0, j = 0, rawdata = 0;
 
-	// FIRST: SCANS IN DATA POINT-BY-POINT AND ALLOCATES TO ASCENDING BLOCKS IN DECLARED ARRAY.
-	for (i = 0; i < counter; i++)
-		{
-			rawdata = read_data(infile);
-			array_raw[i] = rawdata;
-			printf("[%d]:%d  ", i, array_raw[i]);
-			fprintf(outfile, "[%d]:%d  ", i, array_raw[i]);
+	printf("\nRAW DATA, SIZE[%d]: ", num_types);
 
-			/*for (j = i + 1; j < setAmax; j++)
-			{
-				if (array_raw[i] > array_raw[j])
-				{
-					temp = array_raw[i];
-					array_raw[i] = array_raw[j];
-					array_raw[j] = temp;
-					printf("%d ", array_raw[i]);
-					fprintf(outfile, "%d ", array_raw[i]);
-				}
-			}*/
-		}
+	// FIRST: SCANS IN DATA POINT-BY-POINT AND ALLOCATES TO ASCENDING BLOCKS IN DECLARED <array1>.
+	for (i = 0; i < num_types; i++)
+	{
+		rawdata = read_data(infile);
+		array1[i] = rawdata;
+	}
+
+	// SECOND: STREAM DATA FROM <array1> TO <array2>
+	i = 0;
+	for (j = num_types - 1; j >= 0; j--)
+	{
+		array2[j] = &array1[i];
+		printf("%d ", array1[j]);
+		fprintf(outfile, "%d ", array1[j]);
+	}
 
 	printf("\n");
-	//printf("datapoint = %d\t", datapoint);
-	//fprintf(outfile, "%d ", datapoint);
+	free(array1);
+	free(array2);
+}
+
+// ADDS INCREMENTALLY DOWN THE NEW RAWDATA LIST. TERMINATE CONDITION: sum > num_types
+int get_slices(FILE* infile, int max, int num_types)
+{
+	int* array = NULL;
+
+	array = malloc(sizeof(int) * num_types);
+
+	int i = 0, j = 0, sum = 0, rawdata = 0;
+
+	printf("MAX = %d\tnum_types = %d\n", max, num_types);
+
+	while (sum < max)
+	{
+		rawdata = read_data(infile);
+		array[i] = rawdata;
+		printf("rawdata = %d ", rawdata);
+		sum = sum + rawdata;
+		i = i++;
+
+		if (sum > max)
+		{
+			sum = sum - array[i - 1];
+			break;			
+		}
+	}
+
+	printf("SLICES = %d", sum);
+
+	return sum;
 }
