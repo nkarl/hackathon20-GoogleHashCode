@@ -12,14 +12,14 @@
 					 LINE2: {SET OF SELECTED PIZZAS IN ASCENDING ORDER}
  ----------------------------------------------------------------------------------------------------------------------
 	DATASETS INFORMATION:	SET	MAX					TYPES
-							a.	17					4
-							b.	100					10
-							c.	4,500				50
+							a. 17					4
+							b. 100					10
+							c. 4,500				50
 							d. 1,000,000,000		2,000
 							e. 505,000,000			10,000
  ----------------------------------------------------------------------------------------------------------------------
 	ALGORITHM FORMULATION: A- INPUT				: OPEN INPUT FILE AND SCAN IN DATA
-						   B- DATA PROCESSING	: SET PARAMETERS: MAX_PARTICIPANTS = MAX_SLICES	<----- UPPER BOUND
+						   B- DATA PROCESSING	: SET PARAMETERS: MAX_PARTICIPANTS = MAX_SLICES	<--------- UPPER BOUND
 												: MANIPULATE DATA: REORDER DATA TO DESCENDING ORDER
 																   This is done by read and write data
 																   simultaneously into an output file.
