@@ -31,10 +31,7 @@
 																					add to <sum>
 																		Condition of termination: sum > max
 						   C- OUTPUT			: OPEN OUTPUT FILE AND WRITE OUT RESULTS
-												UPDATE: 2020-02-17, MONDAY | 23:18
-														Needs to write data in the following format:														
-														LINE1: <slices> <types>
-														LINE2: {set of selected types}			
+														
 						   --------------------------------------------------------------------------------------------
 					UPDATE: 2020-02-17, MONDAY | 19:21
 							B- DATA PROCESSING: REORGANIZING DATA IN DESCENDING ORDER
@@ -45,6 +42,14 @@
 					UPDATE: 2020-02-17, MONDAY | 22:39
 												NEED TO PUT ORIGINAL ASCENDING DATA INTO A SEPARATE FILE
 												This is needed to fine tune <sum>.
+					UPDATE: 2020-02-17, MONDAY | 23:18
+							C- OUTPUT: PROBLEM! Needs to write data in the following format:
+									   LINE1: <slices> <types>
+									   LINE2: {set of selected types}
+					UPDATE: 2020-02-18, TUESDAY | 08:05
+							B- DATA PROCESSING: NEED TO USE GLOBAL ARRAYS, i.e. placed in main() to retain information,
+												which is needed to write results into output file.
+												Local function-bound arrays limit the options for later tasks.
 ***********************************************************************************************************************/
 
 #include "Header.h"
