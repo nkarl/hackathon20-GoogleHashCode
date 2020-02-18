@@ -6,10 +6,8 @@
 	PROBLEM STATEMENT: Order the maximum number of pizzas possible with the conditions below:
 					   - Number of pizza slices must never exceed the number of participants
 					   - Each pizza has a different number of slices.
-	
 	DATA FORM:		 LINE1: <# OF PARTICIPANTS>		<TOTAL # OF PIZ_TYPES>
 					 LINE2: {SET OF ALL PIZZAS IN ASCENDING ORDER}
-
 	EXPECTED OUTPUT: LINE1: <# OF PIZ_TYPES>
 					 LINE2: {SET OF SELECTED PIZZAS IN ASCENDING ORDER}
  ----------------------------------------------------------------------------------------------------------------------
@@ -20,23 +18,18 @@
 							d. 1,000,000,000		2,000
 							e. 505,000,000			10,000
  ----------------------------------------------------------------------------------------------------------------------
-	ALGORITHM FORMULATION: A- INPUT				: OPEN INPUT FILE AND SCAN IN DATA
-											
+	ALGORITHM FORMULATION: A- INPUT				: OPEN INPUT FILE AND SCAN IN DATA											
 						   B- DATA PROCESSING	: SET PARAMETERS: MAX_PARTICIPANTS = MAX_SLICES	<----- UPPER BOUND
-
 												: MANIPULATE DATA: REORDER DATA TO DESCENDING ORDER
 																   This is done by read and write data
 																   simultaneously into an output file.
-
 												: DETERMINE MAX_SLICES: This is done by adding data point by point
 																		down the list.
-
 																		Condition of termination: sum > max
 																		Tuning sum: open original input file
 																					read in data in ascending order
 																					add to <sum>
 																		Condition of termination: sum > max
-
 						   C- OUTPUT			: OPEN OUTPUT FILE AND WRITE OUT RESULTS
 						   --------------------------------------------------------------------------------------------
 					UPDATE: 2020-02-17, MONDAY | 19:21
