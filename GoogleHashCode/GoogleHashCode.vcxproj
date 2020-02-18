@@ -150,6 +150,7 @@
     <None Include="c_medium.in" />
     <None Include="d_quite_big.in" />
     <None Include="e_also_big.in" />
+    <None Include="rawdata.in" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

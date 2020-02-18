@@ -4,13 +4,13 @@
 #include <stdio.h>
 #include <math.h>
 
-#define setAmax 17
-#define setBmax 100
-#define setCmax 4500
+#define setAtypes 4
+#define setBtypes 10
+#define setCtypes 50
 
 
 char choose_dataset(void);
 
 int read_data(FILE* infile);
 
-void reorganize_data(FILE* infile, FILE* outfile, int counter);
+void reorganize_datasetA(FILE* infile, FILE* outfile, int counter);

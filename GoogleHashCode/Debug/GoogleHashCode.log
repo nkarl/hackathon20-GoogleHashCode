@@ -1,2 +1,8 @@
-﻿  main.c
+﻿  functions.c
+E:\Local Git Repos\GoogleHashCode\GoogleHashCode\functions.c(23,20): warning C4013: 'malloc' undefined; assuming extern returning int
+E:\Local Git Repos\GoogleHashCode\GoogleHashCode\functions.c(23,43): warning C4047: '=': 'int *' differs in levels of indirection from 'int'
+E:\Local Git Repos\GoogleHashCode\GoogleHashCode\functions.c(24,9): warning C4101: 'j': unreferenced local variable
+E:\Local Git Repos\GoogleHashCode\GoogleHashCode\functions.c(24,12): warning C4101: 'temp': unreferenced local variable
+  main.c
+  Generating Code...
   GoogleHashCode.vcxproj -> E:\Local Git Repos\GoogleHashCode\GoogleHashCode\Debug\GoogleHashCode.exe

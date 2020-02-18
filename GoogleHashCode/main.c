@@ -38,6 +38,13 @@
 																		Condition of termination: sum > max
 
 						   C- OUTPUT			: OPEN OUTPUT FILE AND WRITE OUT RESULTS
+						   --------------------------------------------------------------------------------------------
+					UPDATE: 2020-02-17, MONDAY | 19:21
+							B- DATA PROCESSING: REORGANIZING DATA IN DESCENDING ORDER
+												This can be done by using array and pointer.
+												First, read all raw data into arr1
+												then, create pointers array ptr and points to arr1
+												Finally, use for loop to arrange values of arr1 into new arr2
 
 ***********************************************************************************************************************/
 
@@ -81,22 +88,32 @@ int main(void)
 	num_types = read_data(infile);
 
 	/**************************************************************************
-			REORGANIZES DATA USING ARRAY
+			FETCHES RAW DATA AND REORGANIZES
 	***************************************************************************/
 
 	outfile = fopen("rawdata.in", "w");
+	
 	int counter = 0;
-	while (infile != NULL)
+	
+	if (userchoice == 'a')
 	{
-		if (userchoice == 'a')
-		{
-			counter = setAmax;
-			
-		}
-		else if (userchoice == 'b')
-			;
-		else if (userchoice == 'c')
-			;
+		counter = setAtypes;
+		reorganize_datasetA(infile, outfile, counter);
 	}
+
+	else if (userchoice == 'b')
+	{
+		counter = setBtypes;
+		reorganize_datasetA(infile, outfile, counter);
+	}
+	else if (userchoice == 'c')
+	{
+		counter = setCtypes;
+		reorganize_datasetA(infile, outfile, counter);
+	}
+	
+
+	fclose(infile);
+	fclose(outfile);
 	return 0;
 }
