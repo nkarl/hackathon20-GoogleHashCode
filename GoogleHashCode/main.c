@@ -18,7 +18,7 @@
 							d. 1,000,000,000		2,000
 							e. 505,000,000			10,000
  ----------------------------------------------------------------------------------------------------------------------
-	ALGORITHM FORMULATION: A- INPUT				: OPEN INPUT FILE AND SCAN IN DATA											
+	ALGORITHM FORMULATION: A- INPUT				: OPEN INPUT FILE AND SCAN IN DATA
 						   B- DATA PROCESSING	: SET PARAMETERS: MAX_PARTICIPANTS = MAX_SLICES	<----- UPPER BOUND
 												: MANIPULATE DATA: REORDER DATA TO DESCENDING ORDER
 																   This is done by read and write data
