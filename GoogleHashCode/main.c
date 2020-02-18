@@ -1,22 +1,22 @@
 /**********************************************************************************************************************
 	PROJECT: GOOGLE HASHCODE | JUDGE SYSTEM
-	TEAM: COUGARS RAWR: 3	--- MEMBERS: KARL-ALBERT
-										 ROGUE_RUSSIAN
-										 WENZHI ZHUANG
+	TEAM: COUGARS RAWR: 3, MEMBERS: KARL-ALBERT
+					ROGUE_RUSSIAN
+					WENZHI ZHUANG
 	PROBLEM STATEMENT: Order the maximum number of pizzas possible with the conditions below:
 					   - Number of pizza slices must never exceed the number of participants
 					   - Each pizza has a different number of slices.
-	DATA FORM:		 LINE1: <# OF PARTICIPANTS>		<TOTAL # OF PIZ_TYPES>
-					 LINE2: {SET OF ALL PIZZAS IN ASCENDING ORDER}
-	EXPECTED OUTPUT: LINE1: <# OF PIZ_TYPES>
-					 LINE2: {SET OF SELECTED PIZZAS IN ASCENDING ORDER}
+	DATA FORM:		LINE1: <# OF PARTICIPANTS>	<TOTAL # OF PIZ_TYPES>
+				LINE2: {SET OF ALL PIZZAS IN ASCENDING ORDER}
+	EXPECTED OUTPUT: 	LINE1: <# OF PIZ_TYPES>
+				LINE2: {SET OF SELECTED PIZZAS IN ASCENDING ORDER}
  ----------------------------------------------------------------------------------------------------------------------
-	DATASETS INFORMATION:	SET	MAX					TYPES
-							a. 17					4
-							b. 100					10
-							c. 4,500				50
-							d. 1,000,000,000		2,000
-							e. 505,000,000			10,000
+	DATASETS INFORMATION:	SET	MAX				TYPES
+							a. 	17				4
+							b. 	100				10
+							c. 	4,500			50
+							d. 	1,000,000,000	2,000
+							e. 	505,000,000		10,000
  ----------------------------------------------------------------------------------------------------------------------
 	ALGORITHM FORMULATION: A- INPUT				: OPEN INPUT FILE AND SCAN IN DATA
 						   B- DATA PROCESSING	: SET PARAMETERS: MAX_PARTICIPANTS = MAX_SLICES	<--------- UPPER BOUND
@@ -32,24 +32,24 @@
 																		Condition of termination: sum > max
 						   C- OUTPUT			: OPEN OUTPUT FILE AND WRITE OUT RESULTS
 														
-						   --------------------------------------------------------------------------------------------
-					UPDATE: 2020-02-17, MONDAY | 19:21
-							B- DATA PROCESSING: REORGANIZING DATA IN DESCENDING ORDER
-												This can be done by using array and pointer.
-												First, read all raw data into arr1
-												then, create pointers array ptr and points to arr1
-												Finally, use for loop to arrange values of arr1 into new arr2
-					UPDATE: 2020-02-17, MONDAY | 22:39
-												NEED TO PUT ORIGINAL ASCENDING DATA INTO A SEPARATE FILE
-												This is needed to fine tune <sum>.
-					UPDATE: 2020-02-17, MONDAY | 23:18
-							C- OUTPUT: PROBLEM! Needs to write data in the following format:
-									   LINE1: <slices> <types>
-									   LINE2: {set of selected types}
-					UPDATE: 2020-02-18, TUESDAY | 08:05
-							B- DATA PROCESSING: NEED TO USE GLOBAL ARRAYS, i.e. placed in main() to retain information,
-												which is needed to write results into output file.
-												Local function-bound arrays limit the options for later tasks.
+			--------------------------------------------------------------------------------------------
+			UPDATE: 2020-02-17, MONDAY | 19:21
+				B- DATA PROCESSING: REORGANIZING DATA IN DESCENDING ORDER
+						This can be done by using array and pointer.
+						First, read all raw data into arr1
+						then, create pointers array ptr and points to arr1
+						Finally, use for loop to arrange values of arr1 into new arr2
+			UPDATE: 2020-02-17, MONDAY | 22:39
+						NEED TO PUT ORIGINAL ASCENDING DATA INTO A SEPARATE FILE
+						This is needed to fine tune <sum>.
+			UPDATE: 2020-02-17, MONDAY | 23:18
+				C- OUTPUT: PROBLEM! Needs to write data in the following format:
+					   LINE1: <slices> <types>
+					   LINE2: {set of selected types}
+			UPDATE: 2020-02-18, TUESDAY | 08:05
+				B- DATA PROCESSING: NEED TO USE GLOBAL ARRAYS, i.e. placed in main() to retain information,
+						which is needed to write results into output file.
+						Local function-bound arrays limit the options for later tasks.
 ***********************************************************************************************************************/
 
 #include "Header.h"
