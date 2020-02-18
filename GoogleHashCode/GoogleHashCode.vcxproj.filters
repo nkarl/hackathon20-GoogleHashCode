@@ -34,5 +34,6 @@
     <None Include="d_quite_big.in" />
     <None Include="e_also_big.in" />
     <None Include="rawdata.in" />
+    <None Include="rawdata_new.in" />
   </ItemGroup>
 </Project>

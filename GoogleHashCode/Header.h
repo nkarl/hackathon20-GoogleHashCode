@@ -17,7 +17,7 @@ char choose_dataset(void);
 int read_data(FILE* infile);
 
 // READS AND RE-ORGANIZES DATA IN DESCENDING ORDER.
-void reorganize_datasetA(FILE* infile, FILE* outfile, int num_types);
+void reorganize_dataset(FILE* infile, FILE* outfile1, FILE* outfile2, int num_types);
 
 // ADDS INCREMENTALLY DOWN THE NEW RAWDATA LIST. TERMINATE CONDITION: sum > counter
-int get_slices(FILE* infile, int max, int num_types);
+int get_slices(FILE* infile, FILE* infile2, int max, int num_types);

@@ -31,6 +31,10 @@
 																					add to <sum>
 																		Condition of termination: sum > max
 						   C- OUTPUT			: OPEN OUTPUT FILE AND WRITE OUT RESULTS
+												UPDATE: 2020-02-17, MONDAY | 23:18
+														Needs to write data in the following format:														
+														LINE1: <slices> <types>
+														LINE2: {set of selected types}			
 						   --------------------------------------------------------------------------------------------
 					UPDATE: 2020-02-17, MONDAY | 19:21
 							B- DATA PROCESSING: REORGANIZING DATA IN DESCENDING ORDER
@@ -47,7 +51,7 @@
 
 int main(void)
 {
-	FILE* infile = NULL, * outfile = NULL;
+	FILE* infile1 = NULL, * outfile1 = NULL, * outfile2 = NULL;
 
 	/******************************************************************************************************************
 	PART A: INPUT --- OPENS INPUT FILE AND READ IN DATA
@@ -59,15 +63,15 @@ int main(void)
 	{
 		userchoice = choose_dataset();
 		if (userchoice == 'a')
-			infile = fopen("a_example.in", "r");
+			infile1 = fopen("a_example.in", "r");
 		else if (userchoice == 'b')
-			infile = fopen("b_small.in", "r");
+			infile1 = fopen("b_small.in", "r");
 		else if (userchoice == 'c')
-			infile = fopen("c_medium.in", "r");
+			infile1 = fopen("c_medium.in", "r");
 		else if (userchoice == 'd')
-			infile = fopen("d_quite_big.in", "r");
+			infile1 = fopen("d_quite_big.in", "r");
 		else if (userchoice == 'e')
-			infile = fopen("e_also_big.in", "r");
+			infile1 = fopen("e_also_big.in", "r");
 		else
 		{
 			userchoice = '\0';
@@ -83,55 +87,58 @@ int main(void)
 	***************************************************************************/
 	int max = 0, num_types = 0, num_slices = 0;
 
-	max = read_data(infile);
-	num_types = read_data(infile);
+	max = read_data(infile1);
+	num_types = read_data(infile1);
 
 	/**************************************************************************
 			FETCHES RAW DATA AND REORGANIZES
 	***************************************************************************/
-	outfile = fopen("rawdata.in", "w");
+	outfile1 = fopen("rawdata.in", "w");
+	outfile2 = fopen("rawdata_new.in", "w");
 	
 	if (userchoice == 'a')
 	{
 		num_types = setAtypes;
-		reorganize_datasetA(infile, outfile, num_types);
+		reorganize_dataset(infile1, outfile1, outfile2, num_types);
 	}
 
 	else if (userchoice == 'b')
 	{
 		num_types = setBtypes;
-		reorganize_datasetA(infile, outfile, num_types);
+		reorganize_dataset(infile1, outfile1, outfile2, num_types);
 	}
 	else if (userchoice == 'c')
 	{
 		num_types = setCtypes;
-		reorganize_datasetA(infile, outfile, num_types);
+		reorganize_dataset(infile1, outfile1, outfile2, num_types);
 	}
 
 	else if (userchoice == 'd')
 	{
 		num_types = setDtypes;
-		reorganize_datasetA(infile, outfile, num_types);
+		reorganize_dataset(infile1, outfile1, outfile2, num_types);
 	}
 
 	else if (userchoice == 'e')
 	{
 		num_types = setEtypes;
-		reorganize_datasetA(infile, outfile, num_types);
+		reorganize_dataset(infile1, outfile1, outfile2, num_types);
 	}
 	
-	fclose(outfile);
+	fclose(outfile1);
+	fclose(outfile2);
 	/**************************************************************************
 			DETERMINES MAX_SLICES
 	***************************************************************************/
 	// OPENS RAWDATA.IN IN READ-MODE, READY FOR CALCULATION
-	FILE* newinfile = NULL;
-	newinfile = fopen("rawdata.in", "r");
+	FILE* newinfile1 = NULL, *newinfile2 = NULL;
+	newinfile1 = fopen("rawdata.in", "r");
+	newinfile2 = fopen("rawdata_new.in", "r");
 
-	int sum = get_slices(newinfile, max, num_types);
+	int sum[] = get_slices(newinfile1, newinfile2, max, num_types);
 	
 
-	fclose(infile);
-	fclose(outfile);
+	fclose(newinfile1, newinfile2, outfile1, outfile2);
+	//fclose(outfile2);
 	return 0;
 }

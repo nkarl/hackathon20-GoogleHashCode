@@ -1,3 +1,8 @@
-﻿  main.c
-E:\Local Git Repos\GoogleHashCode\GoogleHashCode\main.c(131,15): warning C4133: 'function': incompatible types - from 'FILE *' to 'const char *const '
+﻿  functions.c
+E:\Local Git Repos\GoogleHashCode\GoogleHashCode\functions.c(28,17): warning C4013: 'malloc' undefined; assuming extern returning int
+E:\Local Git Repos\GoogleHashCode\GoogleHashCode\functions.c(28,42): warning C4047: '=': 'int *' differs in levels of indirection from 'int'
+E:\Local Git Repos\GoogleHashCode\GoogleHashCode\functions.c(29,42): warning C4047: '=': 'int *' differs in levels of indirection from 'int'
+E:\Local Git Repos\GoogleHashCode\GoogleHashCode\functions.c(48,25): warning C4047: '=': 'int' differs in levels of indirection from 'int *'
+E:\Local Git Repos\GoogleHashCode\GoogleHashCode\functions.c(54,6): warning C4013: 'free' undefined; assuming extern returning int
+E:\Local Git Repos\GoogleHashCode\GoogleHashCode\functions.c(63,41): warning C4047: '=': 'int *' differs in levels of indirection from 'int'
   GoogleHashCode.vcxproj -> E:\Local Git Repos\GoogleHashCode\GoogleHashCode\Debug\GoogleHashCode.exe

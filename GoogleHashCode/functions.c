@@ -19,7 +19,7 @@ int read_data(FILE* infile)
 }
 
 // READS AND RE-ORGANIZES DATA IN DESCENDING ORDER.
-void reorganize_datasetA(FILE* infile, FILE* outfile, int num_types)
+void reorganize_dataset(FILE* infile, FILE* outfile1, FILE* outfile2, int num_types)
 {	
 	// DELCARES TWO DYNAMIC ARRAYS AND INITIALIZES THEIRS SIZE WITH <NULL>
 	int* array1 = NULL, * array2 = NULL;
@@ -38,6 +38,7 @@ void reorganize_datasetA(FILE* infile, FILE* outfile, int num_types)
 	{
 		rawdata = read_data(infile);
 		array1[i] = rawdata;
+		fprintf(outfile1, "%d ", array1[i]);
 	}
 
 	// SECOND: STREAM DATA FROM <array1> TO <array2>
@@ -46,7 +47,7 @@ void reorganize_datasetA(FILE* infile, FILE* outfile, int num_types)
 	{
 		array2[j] = &array1[i];
 		printf("%d ", array1[j]);
-		fprintf(outfile, "%d ", array1[j]);
+		fprintf(outfile2, "%d ", array1[j]);
 	}
 
 	printf("\n");
@@ -55,32 +56,52 @@ void reorganize_datasetA(FILE* infile, FILE* outfile, int num_types)
 }
 
 // ADDS INCREMENTALLY DOWN THE NEW RAWDATA LIST. TERMINATE CONDITION: sum > num_types
-int get_slices(FILE* infile, int max, int num_types)
+int get_slices(FILE* infile1, FILE* infile2, int max, int num_types)
 {
 	int* array = NULL;
 
 	array = malloc(sizeof(int) * num_types);
 
-	int i = 0, j = 0, sum = 0, rawdata = 0;
+	int i = 0, j = 0, types = 0, sum = 0, rawdata = 0;
 
 	printf("MAX = %d\tnum_types = %d\n", max, num_types);
 
 	while (sum < max)
 	{
-		rawdata = read_data(infile);
+		rawdata = read_data(infile2);
 		array[i] = rawdata;
-		printf("rawdata = %d ", rawdata);
+		printf("datapoint = %d ", rawdata);
 		sum = sum + rawdata;
 		i = i++;
-
+		types = i;
 		if (sum > max)
 		{
-			sum = sum - array[i - 1];
+			i = i - 1;
+			sum = sum - array[i];
+			types = i;
 			break;			
 		}
 	}
 
-	printf("SLICES = %d", sum);
+	while (sum < max)
+	{
+		rawdata = read_data(infile1);
+		array[j] = rawdata;
+		printf("rawdata = %d ", rawdata);
+		sum = sum + rawdata;
+		j = j++;
+		types = types++;
 
-	return sum;
+		if (sum > max)
+		{
+			j = j - 1;
+			sum = sum - array[j];
+			types = types - 1;
+			break;
+		}
+	}
+
+	printf("\n\n\t\t\tSLICES = %d\ttypes = %d\n", sum, types);
+
+	return sum, types;
 }
