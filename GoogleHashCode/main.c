@@ -155,7 +155,7 @@ int main(void)
 	int i = 0, j = 0;
 	for (i = 0; i < num_types; i++)
 	{
-
+		
 	}
 
 	// REARRANGE DATA IN DESCENDING ORDER AND PUSH INTO ARRAY2
@@ -168,6 +168,8 @@ int main(void)
 
 	// Write <sum> and <types> in output file.
 	int* arr3 = NULL;
+	// size of arr3 is dictated by the selected <num_types>,
+	// which is calculated in functinos.c
 	// <arr3> must be initialized with 0 in all allocated blocks.
 	// In order to do this, <sum> and <types> must be stored in main().
 	
