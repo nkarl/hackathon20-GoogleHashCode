@@ -89,7 +89,7 @@ int main(void)
 	*******************************************************************************************************************
 			SETS PARAMETERS
 	***************************************************************************/
-	int max_slices = 0, num_types = 0;
+	int max_slices = 0, num_types = 0, sum = 0;
 	max_slices = read_data(infile1);
 	num_types = read_data(infile1);
 
@@ -102,7 +102,7 @@ int main(void)
 	for (i = 0; i < num_types; i++)
 	{
 		arr1[i] = read_data(infile1);
-		printf("[%d]:%d		", i, arr1[i]);
+		printf("[%d]:%d\t", i, arr1[i]);
 	}
 
 	// MIRROR DATA IN REVERSE ORDER INTO ARRAY2
@@ -112,7 +112,35 @@ int main(void)
 	{
 		arr2[i] = arr1[j];
 		j--;
-		printf("[%d]:%d		", i, arr2[i]);
+		printf("[%d]:%d\t", i, arr2[i]);
+	}
+
+	printf("\n\n");
+	for (i = 0; i < num_types; i++)
+	{
+		sum = sum + arr2[i];
+		printf("[%d]	", sum);
+		j++;
+		if (sum > max_slices)
+		{
+			sum = sum - arr2[i];
+			j--;
+			printf("[%d]	\n\n", sum);
+			break;
+		}
+	}
+	
+	for (i = 0; i < num_types; i++)
+	{
+		sum = sum + arr1[i];
+		printf("[%d]	", sum);
+		j++;
+		if (sum > max_slices)
+		{
+			sum = sum - arr1[i];
+			printf("[%d]----------[j = %d]", sum, j);
+			break;
+		}
 	}
 	
 	//***************************************************************************
