@@ -1,17 +1,17 @@
 /**********************************************************************************************************************
 	PROJECT: GOOGLE HASHCODE | JUDGE SYSTEM
 	TEAM: COUGARS RAWR: 3, MEMBERS: KARL-ALBERT
-					ROGUE_RUSSIAN
-					WENZHI ZHUANG
-	PROBLEM STATEMENT: Order the maximum number of pizzas possible with the conditions below:
+									ROGUE_RUSSIAN
+									WENZHI ZHUANG
+	PROBLEM STATEMENT: Order the max_slicesimum number of pizzas possible with the conditions below:
 					   - Number of pizza slices must never exceed the number of participants
 					   - Each pizza has a different number of slices.
-	DATA FORM:		LINE1: <# OF PARTICIPANTS>	<TOTAL # OF PIZ_TYPES>
-				LINE2: {SET OF ALL PIZZAS IN ASCENDING ORDER}
+	DATA FORM:			LINE1: <# OF PARTICIPANTS>	<TOTAL # OF PIZ_TYPES>
+						LINE2: {SET OF ALL PIZZAS IN ASCENDING ORDER}
 	EXPECTED OUTPUT: 	LINE1: <# OF PIZ_TYPES>
-				LINE2: {SET OF SELECTED PIZZAS IN ASCENDING ORDER}
+						LINE2: {SET OF SELECTED PIZZAS IN ASCENDING ORDER}
  ----------------------------------------------------------------------------------------------------------------------
-	DATASETS INFORMATION:	SET	MAX				TYPES
+	DATASETS INFORMATION:	SET	max_slices		TYPES
 							a. 	17				4
 							b. 	100				10
 							c. 	4,500			50
@@ -25,14 +25,14 @@
 																   simultaneously into an output file.
 												: DETERMINE MAX_SLICES: This is done by adding data point by point
 																		down the list.
-																		Condition of termination: sum > max
+																		Condition of termination: sum > max_slices
 															Tuning sum: Open original input file
 																		Read in data in ascending order
 																		Add to <sum>
-																		Condition of termination: sum > max
+																		Condition of termination: sum > max_slices
 						   C- OUTPUT			: OPEN OUTPUT FILE AND WRITE OUT RESULTS
 														
-			--------------------------------------------------------------------------------------------
+			-----------------------------------------------------------------------------------------------------------
 			UPDATE: 2020-02-17, MONDAY | 19:21
 				B- DATA PROCESSING: REORGANIZING DATA IN DESCENDING ORDER
 						This can be done by using array and pointer.
@@ -50,13 +50,17 @@
 				B- DATA PROCESSING: NEED TO USE GLOBAL ARRAYS, i.e. placed in main() to retain information,
 						which is needed to write results into output file.
 						Local function-bound arrays limit the options for later tasks.
+			UPDATE: 2020-02-19, WEDNESDAY | 00:34
+				B- DATA PROCESSING: CHANGED CODE TO UTILIZE GLOBAL ARRAYS. DONE AND WORKING LIKE A CHARM.
+						NEW PROBLEM: How to push selected number into array3 of undeclared size.
+
 ***********************************************************************************************************************/
 
 #include "Header.h"
 
 int main(void)
 {
-	FILE* infile1 = NULL, * outfile1 = NULL, * outfile2 = NULL;
+	FILE* infile = NULL, * outfile = NULL;
 
 	/******************************************************************************************************************
 	PART A: INPUT --- OPENS INPUT FILE AND READ IN DATA
@@ -68,15 +72,15 @@ int main(void)
 	{
 		userchoice = choose_dataset();
 		if (userchoice == 'a')
-			infile1 = fopen("a_example.in", "r");
+			infile = fopen("a_example.in", "r");
 		else if (userchoice == 'b')
-			infile1 = fopen("b_small.in", "r");
+			infile = fopen("b_small.in", "r");
 		else if (userchoice == 'c')
-			infile1 = fopen("c_medium.in", "r");
+			infile = fopen("c_medium.in", "r");
 		else if (userchoice == 'd')
-			infile1 = fopen("d_quite_big.in", "r");
+			infile = fopen("d_quite_big.in", "r");
 		else if (userchoice == 'e')
-			infile1 = fopen("e_also_big.in", "r");
+			infile = fopen("e_also_big.in", "r");
 		else
 		{
 			userchoice = '\0';
@@ -86,66 +90,76 @@ int main(void)
 	
 	/******************************************************************************************************************
 	PART B: DATA PROCESSING
-
 	*******************************************************************************************************************
 			SETS PARAMETERS
 	***************************************************************************/
-	int max = 0, num_types = 0, num_slices = 0;
+	int max_slices = 0, max_types = 0, sum = 0;
 
-	max = read_data(infile1);
-	num_types = read_data(infile1);
+	max_slices = read_data(infile);
+	max_types = read_data(infile);
 
-	/**************************************************************************
-			FETCHES RAW DATA AND REORGANIZES
-	***************************************************************************/
-	outfile1 = fopen("rawdata.in", "w");
-	outfile2 = fopen("rawdata_new.in", "w");
+	int* arr1 = NULL, * arr2 = NULL, * arr3 = NULL;
+	arr1 = malloc(sizeof(int) * max_types);
+	arr2 = malloc(sizeof(int) * max_types);
+
+	// PUSH DATA INTO ARRAY1 IN ASCENDING ORDER (LIKE ORIGINAL RAW)
+	int i = 0, j = 0;
+	for (i = 0; i < max_types; i++)
+	{
+		arr1[i] = read_data(infile);
+		printf("[%d]:%d\t", i, arr1[i]);
+	}
+
+	// MIRROR DATA IN REVERSE ORDER INTO ARRAY2
+	printf("\n\n");
+	j = max_types - 1;
+	for (i = 0; i < max_types; i++)
+	{
+		arr2[i] = arr1[j];
+		j--;
+		printf("[%d]:%d\t", i, arr2[i]);
+	}
+
+	printf("\n\n");
+	for (i = 0; i < max_types; i++)
+	{
+		sum = sum + arr2[i];
+		printf("[%d]	", sum);
+		//arr3[i] = arr2[i];
+		j++;
+		if (sum > max_slices)
+		{
+			sum = sum - arr2[i];
+			//arr3[i] = arr3[i + 1];
+			j--;
+			printf("[%d]	\n\n", sum);
+			break;
+		}
+	}
 	
-	if (userchoice == 'a')
+	for (i = 0; i < max_types; i++)
 	{
-		num_types = setAtypes;
-		reorganize_dataset(infile1, outfile1, outfile2, num_types);
-	}
-
-	else if (userchoice == 'b')
-	{
-		num_types = setBtypes;
-		reorganize_dataset(infile1, outfile1, outfile2, num_types);
-	}
-	else if (userchoice == 'c')
-	{
-		num_types = setCtypes;
-		reorganize_dataset(infile1, outfile1, outfile2, num_types);
-	}
-
-	else if (userchoice == 'd')
-	{
-		num_types = setDtypes;
-		reorganize_dataset(infile1, outfile1, outfile2, num_types);
-	}
-
-	else if (userchoice == 'e')
-	{
-		num_types = setEtypes;
-		reorganize_dataset(infile1, outfile1, outfile2, num_types);
+		sum = sum + arr1[i];
+		printf("[%d]	", sum);
+		//arr3[i] = arr2[i];
+		j++;
+		if (sum > max_slices)
+		{
+			sum = sum - arr1[i];
+			//arr3[i] = arr3[i + 1];
+			printf("[%d]----------[j, total selected = %d]", sum, j);
+			break;
+		}
 	}
 	
-	fclose(outfile1);
-	fclose(outfile2);
-	/**************************************************************************
-			DETERMINES MAX_SLICES
-	***************************************************************************/
-	// OPENS RAWDATA.IN IN READ-MODE, READY FOR CALCULATION
-	FILE* newinfile1 = NULL, *newinfile2 = NULL;
-	newinfile1 = fopen("rawdata.in", "r");
-	newinfile2 = fopen("rawdata_new.in", "r");
+	/*arr3 = realloc(sizeof(int) * j);
+	for (i = 0; i <= j; i++)
+	{
+		printf("%d ", arr3[i]);
+	}*/
 
-	int sum[2] = { 0,0 };
-	sum[1] = get_slices(newinfile1, newinfile2, max, num_types);
-	
-	fclose(newinfile1);
-	fclose(newinfile2);
-	fclose(outfile1);
-	fclose(outfile2);
+
+	fclose(infile);
+	//fclose(outfile);
 	return 0;
 }
