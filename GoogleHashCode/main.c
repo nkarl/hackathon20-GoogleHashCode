@@ -122,29 +122,29 @@ int main(void)
 	{
 		sum = sum + arr2[i];
 		j++;
-		arr3[i] = &arr2[i];
-		printf("[%d]	", sum);
-
+		//arr3[i] = &arr2[i];
+		
 		if (sum > max_slices)
 		{
 			sum = sum - arr2[i];
-			arr3[i] = NULL;
+			//arr3[i] = NULL;
 			j--;
-			printf("[%d]	\n\n", sum);
+			//printf("[%d]	\n\n", sum);
 			break;
 		}
+		printf("<%d>	", sum);
 	}
 	
 	for (i = 0; i < num_types; i++)
 	{
 		sum = sum + arr1[i];
-		arr3[i] = &arr2[i];
-		printf("[%d]	", sum);
+		//arr3[i] = &arr2[i];
+		//printf("[%d]	", sum);
 		j++;
 		if (sum > max_slices)
 		{
 			sum = sum - arr1[i];
-			arr3[i] = NULL;
+			//arr3[i] = NULL;
 			printf("[%d]----------[j = %d]", sum, j);
 			break;
 		}

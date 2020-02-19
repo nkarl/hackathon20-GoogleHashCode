@@ -1,9 +1,5 @@
 ﻿  main.c
-C:\Users\karl\source\repos\GoogleHashCode\GoogleHashCode\main.c(98,15): warning C4013: 'malloc' undefined; assuming extern returning int
+C:\Users\karl\source\repos\GoogleHashCode\GoogleHashCode\main.c(97,15): warning C4013: 'malloc' undefined; assuming extern returning int
+C:\Users\karl\source\repos\GoogleHashCode\GoogleHashCode\main.c(97,40): warning C4047: '=': 'int *' differs in levels of indirection from 'int'
 C:\Users\karl\source\repos\GoogleHashCode\GoogleHashCode\main.c(98,40): warning C4047: '=': 'int *' differs in levels of indirection from 'int'
-C:\Users\karl\source\repos\GoogleHashCode\GoogleHashCode\main.c(99,40): warning C4047: '=': 'int *' differs in levels of indirection from 'int'
-C:\Users\karl\source\repos\GoogleHashCode\GoogleHashCode\main.c(124,21): warning C4047: '=': 'int' differs in levels of indirection from 'int *'
-C:\Users\karl\source\repos\GoogleHashCode\GoogleHashCode\main.c(130,18): warning C4047: '=': 'int' differs in levels of indirection from 'void *'
-C:\Users\karl\source\repos\GoogleHashCode\GoogleHashCode\main.c(140,21): warning C4047: '=': 'int' differs in levels of indirection from 'int *'
-C:\Users\karl\source\repos\GoogleHashCode\GoogleHashCode\main.c(146,18): warning C4047: '=': 'int' differs in levels of indirection from 'void *'
   GoogleHashCode.vcxproj -> C:\Users\karl\source\repos\GoogleHashCode\GoogleHashCode\Debug\GoogleHashCode.exe
