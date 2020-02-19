@@ -1,1 +1,5 @@
-﻿  GoogleHashCode.vcxproj -> C:\Users\karl\OneDrive\Documents\GitHub\GoogleHashCode\GoogleHashCode\Debug\GoogleHashCode.exe
+﻿  main.c
+E:\Local Git Repos\GoogleHashCode\GoogleHashCode\main.c(98,15): warning C4013: 'malloc' undefined; assuming extern returning int
+E:\Local Git Repos\GoogleHashCode\GoogleHashCode\main.c(98,40): warning C4047: '=': 'int *' differs in levels of indirection from 'int'
+E:\Local Git Repos\GoogleHashCode\GoogleHashCode\main.c(99,40): warning C4047: '=': 'int *' differs in levels of indirection from 'int'
+  GoogleHashCode.vcxproj -> E:\Local Git Repos\GoogleHashCode\GoogleHashCode\Debug\GoogleHashCode.exe
