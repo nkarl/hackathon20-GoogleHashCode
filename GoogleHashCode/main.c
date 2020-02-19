@@ -86,68 +86,14 @@ int main(void)
 	
 	/******************************************************************************************************************
 	PART B: DATA PROCESSING
-
 	*******************************************************************************************************************
 			SETS PARAMETERS
 	***************************************************************************/
 	int max_slices = 0, num_types = 0;
-
 	max_slices = read_data(infile1);
 	num_types = read_data(infile1);
 
-	/**************************************************************************
-			FETCHES RAW DATA AND REORGANIZES
-	***************************************************************************/
-	outfile1 = fopen("rawdata.in", "w");
-	outfile2 = fopen("rawdata_new.in", "w");
-	
-	if (userchoice == 'a')
-	{
-		num_types = setAtypes;
-		reorganize_dataset(infile1, outfile1, outfile2, num_types);
-	}
-
-	else if (userchoice == 'b')
-	{
-		num_types = setBtypes;
-		reorganize_dataset(infile1, outfile1, outfile2, num_types);
-	}
-	else if (userchoice == 'c')
-	{
-		num_types = setCtypes;
-		reorganize_dataset(infile1, outfile1, outfile2, num_types);
-	}
-
-	else if (userchoice == 'd')
-	{
-		num_types = setDtypes;
-		reorganize_dataset(infile1, outfile1, outfile2, num_types);
-	}
-
-	else if (userchoice == 'e')
-	{
-		num_types = setEtypes;
-		reorganize_dataset(infile1, outfile1, outfile2, num_types);
-	}
-	
-	fclose(outfile1);
-	fclose(outfile2);
-
-	/**************************************************************************
-			DETERMINES max_slices
-	***************************************************************************/
-	// OPENS RAWDATA.IN IN READ-MODE, READY FOR CALCULATION
-	FILE* newinfile1 = NULL, *newinfile2 = NULL;
-	newinfile1 = fopen("rawdata.in", "r");
-	newinfile2 = fopen("rawdata_new.in", "r");
-
-	int sum[2] = { 0,0 };
-	sum[1] = get_slices(newinfile1, newinfile2, max_slices, num_types);
-
-	// UPDATE: 2020-02-18-11:18 ////////////////////////////////////////////////
-	// WORK IN PROGRESS BELOW
-	// CREATES GLOBAL ARRAYS TO PREPARE TO RECEIVE DATA STREAM FROM INPUT FILE.
-	int* arr1 = NULL, arr2 = NULL;
+	int* arr1 = NULL, * arr2 = NULL;
 	arr1 = malloc(sizeof(int) * num_types);
 	arr2 = malloc(sizeof(int) * num_types);
 
@@ -155,31 +101,73 @@ int main(void)
 	int i = 0, j = 0;
 	for (i = 0; i < num_types; i++)
 	{
-		
+		arr1[i] = read_data(infile1);
+		printf("[%d]:%d		", i, arr1[i]);
 	}
 
-	// REARRANGE DATA IN DESCENDING ORDER AND PUSH INTO ARRAY2
-	for (j = 0; j >= 0; j--)
+	// MIRROR DATA IN REVERSE ORDER INTO ARRAY2
+	printf("\n\n");
+	j = num_types - 1;
+	for (i = 0; i < num_types; i++)
 	{
-
+		arr2[i] = arr1[j];
+		j--;
+		printf("[%d]:%d		", i, arr2[i]);
 	}
-
-	// Push all values of <selected numbers> into a new array <arr3> and sort it.
-
+	
+	//***************************************************************************
+	//		FETCHES RAW DATA AND REORGANIZES
+	//***************************************************************************/
+	//outfile1 = fopen("rawdata.in", "w");
+	//outfile2 = fopen("rawdata_new.in", "w");
+	//if (userchoice == 'a')
+	//{
+	//	num_types = setAtypes;
+	//	reorganize_dataset(infile1, outfile1, outfile2, num_types);
+	//}
+	//else if (userchoice == 'b')
+	//{
+	//	num_types = setBtypes;
+	//	reorganize_dataset(infile1, outfile1, outfile2, num_types);
+	//}
+	//else if (userchoice == 'c')
+	//{
+	//	num_types = setCtypes;
+	//	reorganize_dataset(infile1, outfile1, outfile2, num_types);
+	//}
+	//else if (userchoice == 'd')
+	//{
+	//	num_types = setDtypes;
+	//	reorganize_dataset(infile1, outfile1, outfile2, num_types);
+	//}
+	//else if (userchoice == 'e')
+	//{
+	//	num_types = setEtypes;
+	//	reorganize_dataset(infile1, outfile1, outfile2, num_types);
+	//}
+	//fclose(outfile1);
+	//fclose(outfile2);
+	//**************************************************************************
+	//		DETERMINES max_slices
+	//***************************************************************************/
+	//// OPENS RAWDATA.IN IN READ-MODE, READY FOR CALCULATION
+	//FILE* newinfile1 = NULL, *newinfile2 = NULL;
+	//newinfile1 = fopen("rawdata.in", "r");
+	//newinfile2 = fopen("rawdata_new.in", "r");
+	//int sum[2] = { 0,0 };
+	//sum[1] = get_slices(newinfile1, newinfile2, max_slices, num_types);
+	// Push all values of <selected numbers> into a new array <arr3> and sort it
 	// Write <sum> and <types> in output file.
-	int* arr3 = NULL;
+	//int* arr3 = NULL;
 	// size of arr3 is dictated by the selected <num_types>,
 	// which is calculated in functinos.c
 	// <arr3> must be initialized with 0 in all allocated blocks.
 	// In order to do this, <sum> and <types> must be stored in main().
-	
 	// Write <arr3> in the output file.
-
-	////////////////////////////////////////////////////////////////////////////
-
-	fclose(newinfile1);
-	fclose(newinfile2);
-	fclose(outfile1);
-	fclose(outfile2);
+	//fclose(newinfile1);
+	//fclose(newinfile2);
+	//fclose(outfile1);
+	//fclose(outfile2);
+	
 	return 0;
 }
