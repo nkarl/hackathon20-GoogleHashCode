@@ -158,60 +158,7 @@ int main(void)
 		printf("%d ", arr3[i]);
 	}*/
 
-	//***************************************************************************
-	//		FETCHES RAW DATA AND REORGANIZES
-	//***************************************************************************/
-	//outfile1 = fopen("rawdata.in", "w");
-	//outfile2 = fopen("rawdata_new.in", "w");
-	//if (userchoice == 'a')
-	//{
-	//	max_types = setAtypes;
-	//	reorganize_dataset(infile, outfile1, outfile2, max_types);
-	//}
-	//else if (userchoice == 'b')
-	//{
-	//	max_types = setBtypes;
-	//	reorganize_dataset(infile, outfile1, outfile2, max_types);
-	//}
-	//else if (userchoice == 'c')
-	//{
-	//	max_types = setCtypes;
-	//	reorganize_dataset(infile, outfile1, outfile2, max_types);
-	//}
-	//else if (userchoice == 'd')
-	//{
-	//	max_types = setDtypes;
-	//	reorganize_dataset(infile, outfile1, outfile2, max_types);
-	//}
-	//else if (userchoice == 'e')
-	//{
-	//	max_types = setEtypes;
-	//	reorganize_dataset(infile, outfile1, outfile2, max_types);
-	//}
-	//fclose(outfile1);
-	//fclose(outfile2);
-	//**************************************************************************
-	//		DETERMINES max_slices
-	//***************************************************************************/
-	//// OPENS RAWDATA.IN IN READ-MODE, READY FOR CALCULATION
-	//FILE* newinfile = NULL, *newinfile2 = NULL;
-	//newinfile = fopen("rawdata.in", "r");
-	//newinfile2 = fopen("rawdata_new.in", "r");
-	//int sum[2] = { 0,0 };
-	//sum[1] = get_slices(newinfile, newinfile2, max_slices, max_types);
-	// Push all values of <selected numbers> into a new array <arr3> and sort it
-	// Write <sum> and <types> in output file.
-	//int* arr3 = NULL;
-	// size of arr3 is dictated by the selected <max_types>,
-	// which is calculated in functinos.c
-	// <arr3> must be initialized with 0 in all allocated blocks.
-	// In order to do this, <sum> and <types> must be stored in main().
-	// Write <arr3> in the output file.
-	//fclose(newinfile);
-	//fclose(newinfile2);
-	//fclose(outfile1);
-	//fclose(outfile2);
-	
+
 	fclose(infile);
 	//fclose(outfile);
 	return 0;
