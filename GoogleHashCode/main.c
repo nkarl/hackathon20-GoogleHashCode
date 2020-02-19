@@ -97,6 +97,8 @@ int main(void)
 	arr1 = malloc(sizeof(int) * num_types);
 	arr2 = malloc(sizeof(int) * num_types);
 
+	int* arr3 = NULL;
+
 	// PUSH DATA INTO ARRAY1 IN ASCENDING ORDER (LIKE ORIGINAL RAW)
 	int i = 0, j = 0;
 	for (i = 0; i < num_types; i++)
@@ -119,11 +121,14 @@ int main(void)
 	for (i = 0; i < num_types; i++)
 	{
 		sum = sum + arr2[i];
-		printf("[%d]	", sum);
 		j++;
+		arr3[i] = &arr2[i];
+		printf("[%d]	", sum);
+
 		if (sum > max_slices)
 		{
 			sum = sum - arr2[i];
+			arr3[i] = NULL;
 			j--;
 			printf("[%d]	\n\n", sum);
 			break;
@@ -133,11 +138,13 @@ int main(void)
 	for (i = 0; i < num_types; i++)
 	{
 		sum = sum + arr1[i];
+		arr3[i] = &arr2[i];
 		printf("[%d]	", sum);
 		j++;
 		if (sum > max_slices)
 		{
 			sum = sum - arr1[i];
+			arr3[i] = NULL;
 			printf("[%d]----------[j = %d]", sum, j);
 			break;
 		}
