@@ -1,15 +1,15 @@
 /**********************************************************************************************************************
 	PROJECT: GOOGLE HASHCODE | JUDGE SYSTEM
 	TEAM: COUGARS RAWR: 3, MEMBERS: KARL-ALBERT
-					ROGUE_RUSSIAN
-					WENZHI ZHUANG
+									ROGUE_RUSSIAN
+									WENZHI ZHUANG
 	PROBLEM STATEMENT: Order the max_slicesimum number of pizzas possible with the conditions below:
 					   - Number of pizza slices must never exceed the number of participants
 					   - Each pizza has a different number of slices.
-	DATA FORM:		LINE1: <# OF PARTICIPANTS>	<TOTAL # OF PIZ_TYPES>
-				LINE2: {SET OF ALL PIZZAS IN ASCENDING ORDER}
+	DATA FORM:			LINE1: <# OF PARTICIPANTS>	<TOTAL # OF PIZ_TYPES>
+						LINE2: {SET OF ALL PIZZAS IN ASCENDING ORDER}
 	EXPECTED OUTPUT: 	LINE1: <# OF PIZ_TYPES>
-				LINE2: {SET OF SELECTED PIZZAS IN ASCENDING ORDER}
+						LINE2: {SET OF SELECTED PIZZAS IN ASCENDING ORDER}
  ----------------------------------------------------------------------------------------------------------------------
 	DATASETS INFORMATION:	SET	max_slices				TYPES
 							a. 	17				4
