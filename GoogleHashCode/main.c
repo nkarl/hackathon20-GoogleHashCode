@@ -93,11 +93,10 @@ int main(void)
 	max_slices = read_data(infile1);
 	num_types = read_data(infile1);
 
-	int* arr1 = NULL, * arr2 = NULL;
+	int* arr1 = NULL, * arr2 = NULL, * arr3 = NULL;
 	arr1 = malloc(sizeof(int) * num_types);
 	arr2 = malloc(sizeof(int) * num_types);
-
-	int* arr3 = NULL;
+	arr3 = malloc(sizeof(int) * num_types);
 
 	// PUSH DATA INTO ARRAY1 IN ASCENDING ORDER (LIKE ORIGINAL RAW)
 	int i = 0, j = 0;
@@ -106,7 +105,6 @@ int main(void)
 		arr1[i] = read_data(infile1);
 		printf("[%d]:%d\t", i, arr1[i]);
 	}
-
 	// MIRROR DATA IN REVERSE ORDER INTO ARRAY2
 	printf("\n\n");
 	j = num_types - 1;
@@ -116,40 +114,53 @@ int main(void)
 		j--;
 		printf("[%d]:%d\t", i, arr2[i]);
 	}
-
 	printf("\n\n");
+
+	// CALCULATES TO GET SUM THAT IS NEAREST TO MAX_SLICES
 	for (i = 0; i < num_types; i++)
 	{
 		sum = sum + arr2[i];
-		j++;
-		//arr3[i] = &arr2[i];
-		
+		arr3[i] = i;	// PUSH THE LOCATIONS OF SELECTED TO DATA-POINT (USED FOR CALCULATION) IN ARRAY3
+		j++;			// j will be used to create a new array with dimension j
+						
 		if (sum > max_slices)
 		{
 			sum = sum - arr2[i];
-			//arr3[i] = NULL;
-			j--;
-			//printf("[%d]	\n\n", sum);
+			arr3[i] = NULL;
+			//j--;
 			break;
 		}
 		printf("<%d>	", sum);
 	}
 	
+	j;
 	for (i = 0; i < num_types; i++)
 	{
 		sum = sum + arr1[i];
-		//arr3[i] = &arr2[i];
-		//printf("[%d]	", sum);
+		arr3[j] = i;
 		j++;
+
 		if (sum > max_slices)
 		{
 			sum = sum - arr1[i];
-			//arr3[i] = NULL;
-			printf("[%d]----------[j = %d]", sum, j);
+			arr3[i] = NULL;
+			j--;
+			printf("[%d]----------[j = %d]\n\n", sum, j);
 			break;
 		}
 	}
 	
+	// GET BLOCK LOCATION IN ARRAY3
+	// PUSH DATA IN ARR3 TO ARR4
+	int* arr4 = NULL;
+	arr4 = malloc(sizeof(int) * j);
+	
+	for (i = 0; i < j; i++)
+	{
+		arr4[i] = arr3[i];
+		printf("%d ", arr4[i]);
+	}
+
 	//***************************************************************************
 	//		FETCHES RAW DATA AND REORGANIZES
 	//***************************************************************************/
